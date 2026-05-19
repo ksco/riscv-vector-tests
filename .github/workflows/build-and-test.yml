@@ -11,8 +11,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        VLEN: [256, 128, 64]
+        VLEN: [256, 128, 64, 32]
         XLEN: [64, 32]
+        exclude:
+          - VLEN: 32
+            XLEN: 64
     steps:
       - uses: actions/checkout@v4
         with:
