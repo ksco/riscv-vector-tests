@@ -104,12 +104,15 @@ func (l LMUL) String() string {
 type VLEN int
 
 func (v VLEN) Valid() bool {
-	return 64 <= v && v <= 65536 && v&(v-1) == 0
+	return 32 <= v && v <= 65536 && v&(v-1) == 0
 }
 
 type XLEN int
 
 func (x XLEN) Valid(v VLEN) bool {
+	if x == 64 && v < 64 {
+		return false
+	}
 	return x == 32 || x == 64
 }
 

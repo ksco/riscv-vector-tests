@@ -1,7 +1,6 @@
 package generator
 
 import (
-	"bytes"
 	"encoding/binary"
 	"errors"
 	"fmt"
@@ -30,6 +29,7 @@ const strides = maxStride - minStride
 
 type TestData struct {
 	CurrentOffset uint64
+	VLEN          VLEN
 
 	Raws [][]byte
 }
@@ -43,13 +43,22 @@ func (t *TestData) Append(raw []byte) uint64 {
 
 func (t *TestData) String() string {
 	builder := strings.Builder{}
+	dir := ".quad"
+	size := 8
+	if t.VLEN == 32 {
+		dir = ".word"
+		size = 4
+	}
 	for _, raw := range t.Raws {
-		for len(raw) > 0 {
-			reader := bytes.NewReader(raw)
-			var data uint64
-			_ = binary.Read(reader, binary.LittleEndian, &data)
-			raw = raw[8:]
-			builder.WriteString(fmt.Sprintf("  .quad 0x%x\n", data))
+		for len(raw) >= size {
+			var val uint64
+			if size == 4 {
+				val = uint64(binary.LittleEndian.Uint32(raw[:4]))
+			} else {
+				val = binary.LittleEndian.Uint64(raw[:8])
+			}
+			fmt.Fprintf(&builder, "  %s 0x%x\n", dir, val)
+			raw = raw[size:]
 		}
 	}
 	return builder.String()
@@ -241,7 +250,7 @@ func ReadInsnFromToml(contents []byte, option Option) (*Insn, error) {
 	i := Insn{
 		Option:   option,
 		EGW:      0,
-		TestData: &TestData{},
+		TestData: &TestData{VLEN: option.VLEN},
 	}
 
 	if err := i.check(); err != nil {
@@ -335,7 +344,7 @@ RVTEST_CODE_END
 					codeRes = append(codeRes, buf)
 					dataRes = append(dataRes, i.genData())
 				}
-				i.TestData = &TestData{}
+				i.TestData = &TestData{VLEN: i.Option.VLEN}
 				builder.Reset()
 				pos += idx
 				if idx == len(cs)-1 {

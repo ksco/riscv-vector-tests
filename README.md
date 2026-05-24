@@ -13,7 +13,7 @@ This repository hosts unit tests generator for the RISC-V vector extension.
 - Support RV32 and RV64
 - Test SEW from e8 to e64
 - Test LMUL from mf8 to m8
-- Support VLEN from 64 to 65536
+- Support VLEN from 32 to 65536 (VLEN=32 requires XLEN=32)
 - Support varies sub-extensions: Zvfh, Zvbb, Zvbc, Zvkg, Zvkned, Zvknha, Zvksed, Zvksh, Zvfbfmin and Zvfbfwma
 - Configurable, see `make help`
 

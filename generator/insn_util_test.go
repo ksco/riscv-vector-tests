@@ -4,6 +4,9 @@ import "testing"
 
 func TestVLEN_Valid(t *testing.T) {
 	tests := map[VLEN]bool{
+		16:     false,
+		32:     true,
+		64:     true,
 		128:    true,
 		129:    false,
 		256:    true,

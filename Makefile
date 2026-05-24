@@ -51,8 +51,8 @@ ifeq ($(shell [ $(XLEN) -gt $(VLEN) ] && echo yes),yes)
 $(error ELEN=$(XLEN) cannot be greater than VLEN=$(VLEN))
 endif
 
-ifeq ($(VLEN), 64)
-# For VLEN=64, use embedded vector extensions instead of full 'v'
+ifneq ($(filter $(VLEN),32 64),)
+# For VLEN<=64, use embedded vector extensions instead of full 'v'
 EXT_V =
 else
 # For VLEN >= 128, use full vector extension

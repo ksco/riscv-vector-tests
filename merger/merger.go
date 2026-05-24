@@ -41,7 +41,7 @@ func main() {
 	files, err := os.ReadDir(*stage1OutputDirF)
 	fatalIf(err)
 
-	r := regexp.MustCompile(".word 0x.+")
+	r := regexp.MustCompile(`(?m)^\.word 0x[0-9a-f]+\n`)
 	for _, file := range files {
 		asmFilepath := filepath.Join(*stage1OutputDirF, file.Name())
 		patchFilepath := filepath.Join(*stage2PatchDirF,
