@@ -6,9 +6,11 @@ sew32 = [
     [0xffffffff],
     [0xfffffffe],
     [0x2],
+    [0x80000000]
 ]
 sew64 = [
     ["0xffffffffffffffff"],
     ["0xfffffffffffffffe"],
-    ["0x2"]
+    ["0x2"],
+    ["0x8000000000000000"]
 ]

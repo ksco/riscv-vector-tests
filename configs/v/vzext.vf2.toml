@@ -17,10 +17,12 @@ sew16 = [
     [0x7fff],
     [0xfffe],
     [0xffff],
+    [0x8000]
 ]
 
 sew32 = [
     [0x7fffffff],
     [0xfffffffe],
     [0xffffffff],
+    [0x80000000]
 ]

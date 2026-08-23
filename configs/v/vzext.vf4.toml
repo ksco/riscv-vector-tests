@@ -17,4 +17,5 @@ sew16 = [
     [0x7fff],
     [0xfffe],
     [0xffff],
+    [0x8000]
 ]
