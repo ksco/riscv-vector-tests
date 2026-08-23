@@ -12,6 +12,7 @@ sew8 = [
     [0x1,  0xff],
     [0x1,  0x7f],
     [0x1f, 0xff],
+    # INT_MIN operands: the asymmetric end of two's complement, -INT_MIN is unrepresentable
     [0x1f, 0x80]
 ]
 sew16 = [

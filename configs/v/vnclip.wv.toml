@@ -17,6 +17,7 @@ sew8 = [
     [0x7f, 0x01],
     [0xff, 0x00],
     [0xff, 0xff],
+    # INT_MIN operands: also the clamp target for signed saturation
     [0x80, 0xff]
 ]
 sew16 = [

@@ -7,6 +7,7 @@ base = [
     [0x0, 0x0],
     [0x1, 0x2],
     [0x3, 0xf],
+    # 15 and 16 encode to simm5 +15 and -16 -- the two ends of the field
     [0xf, 0x2],
     [0x10, 0x2]
 ]
@@ -15,6 +16,7 @@ sew8 = [
     [0x1,  0xff],
     [0x1,  0x7f],
     [0x1f, 0xff],
+    # INT_MIN operands: also the clamp target for signed saturation
     [0x1f, 0x80]
 ]
 sew16 = [
