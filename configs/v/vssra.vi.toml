@@ -30,5 +30,6 @@ sew64 = [
     ["0x1f", "0x0000000000000000"],
     ["0x1",  "0xffffffffffffffff"],
     ["0x1",  "0x7fffffffffffffff"],
-    ["0x1f", "0xffffffffffffffff"]
+    ["0x1f", "0xffffffffffffffff"],
+    ["0x1f", "0x7fffffffffffffff"]
 ]
