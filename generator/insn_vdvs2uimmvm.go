@@ -9,7 +9,9 @@ import (
 func (i *Insn) genCodeVdVs2UimmVm(pos int) []string {
 	vdWidening := strings.HasPrefix(i.Name, "vw")
 	vs2Widening := strings.HasSuffix(i.Name, ".wi")
-	sews := iff(vs2Widening, allSEWs[:len(allSEWs)-2], allSEWs[:len(allSEWs)-1])
+	// Either side 2*SEW (vw* widens vd, .wi widens vs2) caps SEW at ELEN/2;
+	// otherwise SEW=64 is legal and must be tested.
+	sews := iff(vs2Widening || vdWidening, allSEWs[:len(allSEWs)-1], allSEWs)
 	vs2Size := iff(vs2Widening, 2, 1)
 	vdSize := iff(vdWidening, 2, 1)
 

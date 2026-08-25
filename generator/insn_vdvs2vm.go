@@ -16,7 +16,12 @@ func (i *Insn) genCodeVdVs2Vm(pos int) []string {
 	vs2Size := iff(vdNarrowing, 2, 1)
 
 	lmuls := iff(vdWidening || vdNarrowing, wideningMULs, allLMULs)
-	sews := iff(vdWidening || vdNarrowing, i.floatSEWs()[:len(i.floatSEWs())-1], i.floatSEWs())
+	// `float` is computed above but was not consulted here: the integer members of this
+	// format (vbrev.v, vbrev8.v, vclz.v, vcpop.v, vctz.v, vrev8.v) were getting the float
+	// SEW list and so were never tested at SEW=8, which they declare and which is legal.
+	sews := iff(vdWidening || vdNarrowing,
+		i.floatSEWs()[:len(i.floatSEWs())-1],
+		iff(float, i.floatSEWs(), allSEWs))
 	sews = iff(sew16Only, []SEW{16}, sews)
 	combinations := i.combinations(lmuls, sews, []bool{false, true}, i.rms())
 
