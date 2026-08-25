@@ -17,4 +17,6 @@ sew16 = [
     [0x7fff],
     [0xfffe],
     [0xffff],
+    # INT_MIN operands: the asymmetric end of two's complement, -INT_MIN is unrepresentable
+    [0x8000]
 ]

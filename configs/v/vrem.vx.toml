@@ -18,7 +18,11 @@ sew8 = [
     [0xff, 0xff],
     [0xff, 0xff],
     [0xff, 0x01],
-    [0x01, 0xff]
+    [0x01, 0xff],
+    # INT_MIN operands: the asymmetric end of two's complement
+    [0x80, 0xff],
+    # INT_MIN / -1: the signed-overflow case, whose result the spec defines
+    [0x80, 0xff]
 ]
 sew16 = [
     [0x7e00, 0x6db7],
@@ -31,7 +35,10 @@ sew16 = [
     [0xff00, 0xff00],
     [0xffff, 0xffff],
     [0xffff, 0x0001],
-    [0x0001, 0xffff]
+    [0x0001, 0xffff],
+    [0x8000, 0xffff],
+    # INT_MIN / -1: the signed-overflow case, whose result the spec defines
+    [0x8000, 0xffff]
 ]
 sew32 = [
     [0x00007e00, 0xb6db6db7],
@@ -44,7 +51,10 @@ sew32 = [
     [0xff000000, 0xff000000],
     [0xffffffff, 0xffffffff],
     [0xffffffff, 0x00000001],
-    [0x00000001, 0xffffffff]
+    [0x00000001, 0xffffffff],
+    [0x80000000, 0xffffffff],
+    # INT_MIN / -1: the signed-overflow case, whose result the spec defines
+    [0x80000000, 0xffffffff]
 ]
 sew64 = [
     ["0x0000000000007e00", "0x6db6db6db6db6db7"],
@@ -53,5 +63,8 @@ sew64 = [
     ["0xffffffff80000000", "0x0000000000000000"],
     ["0xffffffff80000000", "0xffffffffffff8000"],
     ["0xaaaaaaaaaaaaaaab", "0x000000000002fe7d"],
-    ["0x000000000002fe7d", "0xaaaaaaaaaaaaaaab"]
+    ["0x000000000002fe7d", "0xaaaaaaaaaaaaaaab"],
+    ["0x8000000000000000", "0xffffffffffffffff"],
+    # INT_MIN / -1: the signed-overflow case, whose result the spec defines
+    ["0x8000000000000000", "0xffffffffffffffff"]
 ]

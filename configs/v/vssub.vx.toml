@@ -20,7 +20,12 @@ sew8 = [
     [0xff, 0x01],
     [0x01, 0xff],
     [0xff, 0xff],
-    [0xff, 0x00]
+    [0xff, 0x00],
+    # pairs that reach the saturation boundary at this SEW
+    [0x80, 0x01],
+    [0x7f, 0xff],
+    # INT_MIN operands: also the clamp target for signed saturation
+    [0x80, 0xff]
 ]
 sew16 = [
     [0xfff8, 0x0000],
@@ -35,7 +40,11 @@ sew16 = [
     [0xffff, 0x0001],
     [0x0001, 0xffff],
     [0xffff, 0xffff],
-    [0xffff, 0x0000]
+    [0xffff, 0x0000],
+    # pairs that reach the saturation boundary at this SEW
+    [0x8000, 0x0001],
+    [0x7fff, 0xffff],
+    [0x8000, 0xffff]
 ]
 sew32 = [
     [0xfffffff8, 0x00000000],
@@ -50,7 +59,11 @@ sew32 = [
     [0xffffffff, 0x00000001],
     [0x00000001, 0xffffffff],
     [0xffffffff, 0xffffffff],
-    [0xffffffff, 0x00000000]
+    [0xffffffff, 0x00000000],
+    # pairs that reach the saturation boundary at this SEW
+    [0x80000000, 0x00000001],
+    [0x7fffffff, 0xffffffff],
+    [0x80000000, 0xffffffff]
 ]
 sew64 = [
     ["0x0000000000000000", "0xffffffffffff8000"],
@@ -63,5 +76,9 @@ sew64 = [
     ["0x000000007fffffff", "0xffffffffffff8000"],
     ["0x0000000000000000", "0xffffffffffffffff"],
     ["0xffffffffffffffff", "0x0000000000000001"],
-    ["0xffffffffffffffff", "0xffffffffffffffff"]
+    ["0xffffffffffffffff", "0xffffffffffffffff"],
+    # pairs that reach the saturation boundary at this SEW
+    ["0x8000000000000000", "0x0000000000000001"],
+    ["0x7fffffffffffffff", "0xffffffffffffffff"],
+    ["0x8000000000000000", "0xffffffffffffffff"]
 ]

@@ -7,4 +7,7 @@ base = [
     [0x1],
     [0x3],
     [0x1f],
+    # 15 and 16 encode to simm5 +15 and -16 -- the two ends of the field
+    [0xf],
+    [0x10]
 ]

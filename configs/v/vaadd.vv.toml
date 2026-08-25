@@ -15,7 +15,9 @@ sew8 = [
     [0x7f, 0x07],
     [0x7f, 0x01],
     [0xff, 0x00],
-    [0xff, 0xff]
+    [0xff, 0xff],
+    # INT_MIN operands: the asymmetric end of two's complement, -INT_MIN is unrepresentable
+    [0x80, 0xff]
 ]
 sew16 = [
     [0xfff8, 0x0000],
@@ -24,7 +26,8 @@ sew16 = [
     [0x7fff, 0x07ff],
     [0x7fff, 0x0001],
     [0xffff, 0x0000],
-    [0xffff, 0xffff]
+    [0xffff, 0xffff],
+    [0x8000, 0xffff]
 ]
 sew32 = [
     [0xfffffff8, 0x00000000],
@@ -33,7 +36,8 @@ sew32 = [
     [0x00007fff, 0x000007ff],
     [0x00007fff, 0x00000001],
     [0xffffffff, 0x00000000],
-    [0xffffffff, 0xffffffff]
+    [0xffffffff, 0xffffffff],
+    [0x80000000, 0xffffffff]
 ]
 sew64 = [
     ["0xffffffffffff8000", "0x0000000000000000"],
@@ -45,5 +49,6 @@ sew64 = [
     ["0x000000007fffffff", "0xffffffffffff8000"],
     ["0xffffffffffffffff", "0x0000000000000001"],
     ["0xffffffffffffffff", "0x0000000000000000"],
-    ["0xffffffffffffffff", "0xffffffffffffffff"]
+    ["0xffffffffffffffff", "0xffffffffffffffff"],
+    ["0x8000000000000000", "0xffffffffffffffff"]
 ]
